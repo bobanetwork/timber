@@ -234,6 +234,8 @@ async function getFromBlock(db, contractName) {
     let transactionHash = await utilsWeb3.getDeployedContractTransactionHash(contractName);
     logger.info(` ${contractName} deployed transactionHash:  ${transactionHash}`);
 
+    console.log(transactionHash)
+
     if (transactionHash) {
       receipt = await utilsWeb3.getTransactionReceipt(transactionHash);
       logger.info(`receipt: ${receipt}`);
@@ -262,6 +264,7 @@ async function start(db, contractName, contractInstance, treeId) {
     // check the fiddly case of having to re-filter any old blocks due to lost information (e.g. due to a system crash).
     const fromBlock = await getFromBlock(db, contractName); // the blockNumber we get is the next WHOLE block to start filtering.
 
+    console.log(fromBlock)
     // Now we filter indefinitely:
     await filterBlock(db, contractName, contractInstance, fromBlock, treeId);
     return true;
