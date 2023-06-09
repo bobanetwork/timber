@@ -84,7 +84,7 @@ async function getContractAddress(contractName) {
   let deployedAddress;
   const contractInterface = getContractInterface(contractName);
 
-  const networkId = await web3.eth.net.getId();
+  const networkId = 2888
   logger.silly(`networkId: ${networkId}`);
 
   if (contractInterface && contractInterface.networks && contractInterface.networks[networkId]) {
@@ -101,7 +101,7 @@ async function getDeployedContractTransactionHash(contractName) {
   let transactionHash;
   const contractInterface = getContractInterface(contractName);
 
-  const networkId = await web3.eth.net.getId();
+  const networkId = 2888
   logger.silly(`networkId: ${networkId}`);
 
   if (contractInterface && contractInterface.networks && contractInterface.networks[networkId]) {
