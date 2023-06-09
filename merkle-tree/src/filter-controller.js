@@ -225,12 +225,14 @@ async function getFromBlock(db, contractName) {
       break;
   }
 
+  console.log('boba timber')
   logger.info(
     `Stats at restart, from the merkle-tree's mongodb: latestLeaf, ${latestLeaf}; blockNumber, ${blockNumber}`,
   );
 
   if (blockNumber === undefined) {
     let receipt;
+    console.log('undefined blk no')
     let transactionHash = await utilsWeb3.getDeployedContractTransactionHash(contractName);
     logger.info(` ${contractName} deployed transactionHash:  ${transactionHash}`);
 
