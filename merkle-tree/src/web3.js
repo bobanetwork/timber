@@ -29,13 +29,26 @@ export default {
       config.web3.options,
     );
 
-    provider.on('error', err => logger.error(err));
+    provider.on('error', err => {
+      if (err.message.includes('CONNECTION ERROR:')) {
+        logger.error('WebSocket connection error. Attempting to reconnect...');
+        this.reconnect();
+      } else {
+        logger.error(err);
+      }
+    });
     provider.on('connect', () => logger.info('Blockchain Connected ...'));
     provider.on('end', () => logger.error('Blockchain Disconnected'));
 
     this.web3 = new Web3(provider);
 
     return this.web3;
+  },
+
+  reconnect() {
+    this.web3.currentProvider.disconnect();
+    this.web3 = null;
+    this.connect();
   },
 
   /**
