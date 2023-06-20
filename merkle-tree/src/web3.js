@@ -46,8 +46,6 @@ export default {
   },
 
   reconnect() {
-    this.web3.currentProvider.disconnect();
-    this.web3 = null;
     this.connect();
   },
 
